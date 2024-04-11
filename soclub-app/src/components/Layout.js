@@ -1,4 +1,4 @@
-import Navigation from "./NavBar/index.js";
+import NavBar from "./NavBar/index.js";
 import Head from "next/head.js";
 
 export default function Layout() {
@@ -7,7 +7,7 @@ export default function Layout() {
       <Head>
         <title>SoClub-App</title>
       </Head>
-      <Navigation />
+      <NavBar />
     </>
   );
 }

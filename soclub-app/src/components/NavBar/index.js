@@ -1,19 +1,19 @@
 import Link from "next/link";
 
-export default function Navigation() {
+export default function NavBar() {
   return (
     <nav>
       <li>
-        <Link href="events">Events</Link>
+        <Link href="../Events">Events</Link>
       </li>
       <li>
-        <Link href="/my-events">My Events</Link>
+        <Link href="../MyEvents">My Events</Link>
       </li>
       <li>
-        <Link href="/profile">My profile</Link>
+        <Link href="../ProfilePage">My profile</Link>
       </li>
       <li>
-        <Link href="/map">Map</Link>
+        <Link href="../map">Map</Link>
       </li>
     </nav>
   );
