@@ -5,16 +5,10 @@ export default function NavBar() {
     <nav>
       <ul>
         <li>
+          <Link href="/">Home</Link>
+        </li>
+        <li>
           <Link href="/events">Events</Link>
-        </li>
-        <li>
-          <Link href="/MyEvents">My Events</Link>
-        </li>
-        <li>
-          <Link href="/ProfilePage">My profile</Link>
-        </li>
-        <li>
-          <Link href="/Map">Map</Link>
         </li>
       </ul>
     </nav>

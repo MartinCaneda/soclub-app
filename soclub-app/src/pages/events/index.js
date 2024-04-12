@@ -1,7 +1,8 @@
 export default function Events() {
+  console.log("events");
   return (
     <>
-      <p>Events</p>;
+      <h1>Events</h1>
     </>
   );
 }
