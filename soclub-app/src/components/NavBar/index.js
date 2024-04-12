@@ -8,7 +8,7 @@ export default function NavBar() {
           <Link href="/">Home</Link>
         </li>
         <li>
-          <Link href="/events">Events</Link>
+          <Link href="/create-events">Events</Link>
         </li>
       </ul>
     </nav>
