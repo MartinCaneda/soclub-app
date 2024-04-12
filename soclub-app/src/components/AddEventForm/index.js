@@ -1,9 +1,9 @@
-export default function AddEventForm({ onSubmit, formData }) {
+export default function AddEventForm() {
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    console.log("data", data);
+    console.log(data);
   }
 
   return (
