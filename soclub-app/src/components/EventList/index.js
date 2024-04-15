@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function EventList() {
   const { data, isLoading } = useSWR("/api/events");
-
+  console.log(data);
   if (isLoading) {
     return <h1>Loading...</h1>;
   }

@@ -5,7 +5,7 @@ export default function Event() {
   const router = useRouter();
   const { id } = router.query;
 
-  const { data, isLoading } = useSWR(`/api/events/[id]/${id}`);
+  const { data, isLoading } = useSWR(`/api/events/${id}`);
 
   if (isLoading) {
     return <h1>Loading...</h1>;

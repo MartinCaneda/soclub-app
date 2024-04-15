@@ -5,7 +5,7 @@ export default async function handler(request, response) {
   await dbConnect();
 
   if (request.method === "GET") {
-    const products = await Event.find();
+    const events = await Event.find();
     return response.status(200).json(events);
   } else if (request.method === "POST") {
     try {
