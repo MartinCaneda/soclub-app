@@ -36,7 +36,7 @@ export default function AddEventForm() {
         rows="10"
         maxLength="100"
       ></textarea>
-      <button type="submit">Add event</button>
+      <button type="submit">Add Event</button>
     </form>
   );
 }

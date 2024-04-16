@@ -10,7 +10,6 @@ export default function Home() {
         <title>soClub</title>
       </Head>
       <main>
-        <h1>Homepage</h1>
         <EventList />
       </main>
     </>
