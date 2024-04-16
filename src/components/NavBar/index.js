@@ -10,9 +10,14 @@ export default function NavBar() {
           <Link href="/">Home</Link>
         </li>
         {session && (
-          <li>
-            <Link href="/create-events">Create Events</Link>
-          </li>
+          <ul>
+            <li>
+              <Link href="/profile">Profile</Link>
+            </li>
+            <li>
+              <Link href="/event-map">Map</Link>
+            </li>
+          </ul>
         )}
       </ul>
     </nav>

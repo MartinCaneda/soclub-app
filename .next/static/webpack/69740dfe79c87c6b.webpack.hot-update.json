@@ -1,1 +1,0 @@
-{"c":["pages/_app","webpack"],"r":["pages/[id]"],"m":["./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?absolutePagePath=%2Froot%2Fspiced%2Fcapstone-project%2Fsrc%2Fpages%2F%5Bid%5D.js&page=%2F%5Bid%5D!","./node_modules/next/router.js","./src/components/Event/index.js","./src/pages/[id].js"]}

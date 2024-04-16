@@ -3,8 +3,6 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
-  "/[id]": "pages/[id].js",
-  "/api/events/[id]": "pages/api/events/[id].js",
-  "/api/events": "pages/api/events.js",
-  "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js"
+  "/profile": "pages/profile.js",
+  "/api/events": "pages/api/events.js"
 }
