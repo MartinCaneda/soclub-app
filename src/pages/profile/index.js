@@ -1,4 +1,5 @@
 import AddEventForm from "@/components/AddEventForm";
+import Profile from "@/components/ProfileInfo";
 
 export default function CreateEventPage() {
   async function createEvent(event) {
@@ -13,7 +14,7 @@ export default function CreateEventPage() {
   }
   return (
     <>
-      <h2>Profile info</h2>
+      <Profile />
       <h2>Create an event</h2>
       <AddEventForm onSubmit={createEvent} formName="create-event" />
     </>
