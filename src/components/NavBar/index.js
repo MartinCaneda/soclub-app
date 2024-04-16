@@ -15,7 +15,7 @@ export default function NavBar() {
               <Link href="/profile">Profile</Link>
             </li>
             <li>
-              <Link href="/event-map">Map</Link>
+              <Link href="/map">Map</Link>
             </li>
           </ul>
         )}
