@@ -1,5 +1,6 @@
 import dbConnect from "@/db/connect";
 import Event from "@/db/models/Event";
+import User from "@/db/models/User";
 
 export default async function handler(request, response) {
   await dbConnect();
@@ -9,9 +10,13 @@ export default async function handler(request, response) {
     return response.status(200).json(events);
   } else if (request.method === "POST") {
     try {
-      const eventData = request.body;
-      await Event.create(eventData);
-
+      const { data: eventData, userId } = request.body;
+      console.log("eventData============================", eventData);
+      console.log("userId================================", userId);
+      const newlyAddedEvent = await Event.create(eventData);
+      await User.findByIdAndUpdate(userId, {
+        $push: { createdEvents: newlyAddedEvent._id },
+      });
       response.status(201).json({ status: "Event created" });
     } catch (error) {
       console.log(error);

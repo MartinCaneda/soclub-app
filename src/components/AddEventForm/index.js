@@ -1,7 +1,10 @@
 import useSWR from "swr";
+import { useSession } from "next-auth/react";
 
 export default function AddEventForm() {
   const { mutate } = useSWR("/api/events");
+  const { data: session } = useSession();
+  console.log("session", session.user.userId);
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -14,7 +17,7 @@ export default function AddEventForm() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({ data, userId: session.user.userId }),
     });
 
     if (response.ok) {

@@ -4,7 +4,7 @@ import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import clientPromise from "@/db/mongodb";
 
 export const authOptions = {
-  // Configure one or more authentication providers
+  //I can add more later, keep it simple for now
   adapter: MongoDBAdapter(clientPromise),
   providers: [
     GithubProvider({

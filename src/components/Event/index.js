@@ -19,7 +19,7 @@ export default function Event() {
     <>
       <h2>Event: {data.name}</h2>
       <p>Location: {data.location}</p>
-      <p>Price: {data.description}</p>
+      <p>Description: {data.description}</p>
     </>
   );
 }
