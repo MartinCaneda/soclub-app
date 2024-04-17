@@ -6,7 +6,7 @@ export default function MyProfile({ userId }) {
   return (
     <>
       <Profile />
-      <MyEvents userId={userId} />
+      {/*       <MyEvents userId={userId} /> */}
     </>
   );
 }
