@@ -12,6 +12,10 @@ export default function MyMap() {
       }}
       style={{ width: 600, height: 400 }}
       mapStyle="mapbox://styles/mapbox/streets-v9"
-    ></Map>
+    >
+      {" "}
+      <NavigationControl />
+      <GeolocateControl />
+    </Map>
   );
 }

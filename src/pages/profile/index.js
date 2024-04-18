@@ -1,12 +1,16 @@
 import Profile from "@/components/ProfileInfo";
-import MyEvents from "@/components/UserEvents";
 import { getSession } from "next-auth/react";
+import useSWR from "swr";
+import UserEvents from "@/components/UserEvents";
 
 export default function MyProfile({ userId }) {
+  console.log("userId", userId);
+  const { data, isLoading } = useSWR(`/api/user/${userId}`);
+
   return (
     <>
       <Profile />
-      {/*       <MyEvents userId={userId} /> */}
+      <UserEvents />
     </>
   );
 }

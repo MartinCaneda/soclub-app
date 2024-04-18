@@ -6,7 +6,7 @@ export default function Event() {
   const { id } = router.query;
 
   const { data, isLoading } = useSWR(`/api/events/${id}`);
-
+  console.log("data", data);
   if (isLoading) {
     return <h1>Loading...</h1>;
   }

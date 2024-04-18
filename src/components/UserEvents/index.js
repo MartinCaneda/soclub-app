@@ -1,24 +1,29 @@
 import useSWR from "swr";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
-export default function MyEvents({ userId }) {
-  const { data, isLoading } = useSWR("/api/events");
-  console.log(data);
+export default function UserEvents() {
+  const { data: session } = useSession();
+  const userId = session?.user?.userId;
+  const { data, isLoading } = useSWR(`/api/user/${userId}`);
+
   if (isLoading) {
     return <h1>Loading...</h1>;
   }
 
   if (!data) {
-    return <p>No Events Found</p>;
+    return <h1>No events found.</h1>;
   }
 
   return (
     <>
       <h1>My Events</h1>
       <ul>
-        {myEvents.map((event) => (
+        {data.createdEvents.map((event) => (
           <li key={event._id}>
-            <Link href={`/${event._id}`}>{event.name}</Link>
+            <Link href={`/${event._id}`}>
+              <p>{event.name}</p>
+            </Link>
           </li>
         ))}
       </ul>
