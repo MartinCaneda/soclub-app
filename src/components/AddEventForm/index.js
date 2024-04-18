@@ -4,7 +4,6 @@ import { useSession } from "next-auth/react";
 export default function AddEventForm() {
   const { mutate } = useSWR("/api/events");
   const { data: session } = useSession();
-  console.log("session", session.user.userId);
   async function handleSubmit(event) {
     event.preventDefault();
 

@@ -5,8 +5,11 @@ import { useSession } from "next-auth/react";
 export default function UserEvents() {
   const { data: session } = useSession();
   const userId = session?.user?.userId;
-  const { data, isLoading } = useSWR(`/api/user/${userId}`);
-
+  const { data, isLoading } = useSWR(userId ? `/api/user/${userId}` : null);
+  console.log("userIdddddddddd", userId);
+  console.log("dataaaaa", data);
+  if (session) {
+  }
   if (isLoading) {
     return <h1>Loading...</h1>;
   }
