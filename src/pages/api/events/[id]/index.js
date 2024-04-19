@@ -1,5 +1,6 @@
 import dbConnect from "@/db/connect";
 import Event from "@/db/models/Event";
+import User from "@/db/models/User";
 
 export default async function handler(request, response) {
   await dbConnect();

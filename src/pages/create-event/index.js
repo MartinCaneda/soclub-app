@@ -12,8 +12,6 @@ export default function CreateEventPage() {
 
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    console.log(data);
-
     const response = await fetch("/api/events", {
       method: "POST",
       headers: {
