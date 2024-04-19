@@ -6,8 +6,6 @@ export default function UserEvents() {
   const { data: session } = useSession();
   const userId = session?.user?.userId;
   const { data, isLoading } = useSWR(userId ? `/api/user/${userId}` : null);
-  console.log("userIdddddddddd", userId);
-  console.log("dataaaaa", data);
   if (session) {
   }
   if (isLoading) {
