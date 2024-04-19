@@ -1,31 +1,10 @@
 import useSWR from "swr";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
-export default function AddEventForm() {
-  const { mutate } = useSWR("/api/events");
-  const { data: session } = useSession();
-  async function handleSubmit(event) {
-    event.preventDefault();
-
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
-    console.log(data);
-
-    const response = await fetch("/api/events", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ data, userId: session.user.userId }),
-    });
-
-    if (response.ok) {
-      mutate();
-    }
-  }
-
+export default function AddEventForm({ onSubmit, isEditMode }) {
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={onSubmit}>
       <label htmlFor="name">Name</label>
       <input id="name" name="name" type="text" required />
       <label htmlFor="location">Location</label>
@@ -38,7 +17,7 @@ export default function AddEventForm() {
         rows="10"
         maxLength="100"
       ></textarea>
-      <button type="submit">Add Event</button>
+      <button type="submit">{isEditMode ? "Edit Event" : "Add Event"}</button>
     </form>
   );
 }

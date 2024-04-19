@@ -18,21 +18,22 @@ export default function Event() {
   if (!data) {
     return;
   }
-  async function handleEditProduct(event) {
+  async function handleEditEvent(event) {
     event.preventDefault();
 
     const formData = new FormData(event.target);
-    const productData = Object.fromEntries(formData);
+    const eventData = Object.fromEntries(formData);
     const response = await fetch(`/api/events/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(productData),
+      body: JSON.stringify(eventData),
     });
 
     if (response.ok) {
       mutate();
+      router.push("/");
     }
   }
   async function handleDeleteEvent() {
@@ -45,7 +46,9 @@ export default function Event() {
   }
   return (
     <>
-      {isEditMode && <AddEventForm onSubmit={handleEditProduct} />}
+      {isEditMode && (
+        <AddEventForm isEditMode={true} onSubmit={handleEditEvent} />
+      )}
       <h2>Event: {data.name}</h2>
       <p>Location: {data.location}</p>
       <p>Description: {data.description}</p>
