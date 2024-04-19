@@ -15,10 +15,10 @@ export default function NavBar() {
               <Link href="/profile">Profile</Link>
             </li>
             <li>
-              <Link href="/map">Map</Link>
+              <Link href="/create-event">Create Event</Link>
             </li>
             <li>
-              <Link href="/create-event">Create Event</Link>
+              <Link href="/map">Map</Link>
             </li>
           </>
         )}
