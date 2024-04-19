@@ -4,7 +4,6 @@ import useSWR from "swr";
 import UserEvents from "@/components/UserEvents";
 
 export default function MyProfile({ userId }) {
-  console.log("userId", userId);
   const { data, isLoading } = useSWR(`/api/user/${userId}`);
 
   return (

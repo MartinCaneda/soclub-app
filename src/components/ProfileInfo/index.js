@@ -2,7 +2,6 @@ import { useSession } from "next-auth/react";
 
 export default function Profile() {
   const { data: session } = useSession();
-  console.log("session", session);
   if (!session) {
     return <div>Please sign in</div>;
   }

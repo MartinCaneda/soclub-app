@@ -2,6 +2,7 @@ import dbConnect from "@/db/connect";
 import User from "@/db/models/User";
 
 export default async function handler(request, response) {
+  console.log("ÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇÇ");
   await dbConnect();
   if (request.method === "GET") {
     try {
@@ -11,7 +12,7 @@ export default async function handler(request, response) {
         "createdEvents"
       );
       console.log("createdEventsObject", createdEventsObject);
-      response.status(201).json(createdEventsObject);
+      response.status(200).json(createdEventsObject);
     } catch (error) {
       console.log(error);
       response.status(400).json({ error: error.message });
