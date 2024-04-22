@@ -11,6 +11,7 @@ export default async function handler(request, response) {
   } else if (request.method === "POST") {
     try {
       const { data: eventData, userId } = request.body;
+      eventData.creator = userId;
       console.log("eventData============================", eventData);
       console.log("userId================================", userId);
       const newlyAddedEvent = await Event.create(eventData);

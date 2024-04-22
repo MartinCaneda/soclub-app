@@ -1,17 +1,11 @@
-export default function FavoriteButton({
-  artPiecesInfo,
-  onToggleFavorite,
-  slug,
-}) {
-  const foundArtPieceInfo = artPiecesInfo.find((info) => {
-    return info.slug === slug;
-  });
+/* export default function FavoriteButton() {
 
   return (
-    <button className="favButton" onClick={() => onToggleFavorite(slug)}>
+    <button className="favButton" onClick={}>
       <span>
-        {foundArtPieceInfo?.isFavorite ? "❤️" : <i>Add to Favorites</i>}
+        {EventIsFavorite?.isFavorite ? "❤️" : <i>Add to Favorites</i>}
       </span>
     </button>
   );
 }
+ */

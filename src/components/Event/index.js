@@ -10,16 +10,19 @@ export default function Event() {
 
   const { mutate } = useSWR("/api/events");
   const [isEditMode, setIsEditMode] = useState(false);
-  const { data, isLoading } = useSWR(`/api/events/${id}`);
+  const { data: eventData, isLoading: eventDataLoading } = useSWR(
+    `/api/events/${id}`
+  );
   const { data: session } = useSession();
 
-  if (isLoading) {
+  if (eventDataLoading) {
     return <h1>Loading...</h1>;
   }
 
-  if (!data) {
-    return;
+  if (!eventData) {
+    return null;
   }
+  const { name, location, description, creator } = eventData;
   async function handleEditEvent(event) {
     event.preventDefault();
 
@@ -46,15 +49,19 @@ export default function Event() {
       router.push("/");
     }
   }
+  const isEventCreator = creator.some(
+    (creatorId) => creatorId === session?.user?.userId
+  );
+
   return (
     <>
       {isEditMode && (
         <AddEventForm isEditMode={true} onSubmit={handleEditEvent} />
       )}
-      <h2>Event: {data.name}</h2>
-      <p>Location: {data.location}</p>
-      <p>Description: {data.description}</p>
-      {session && (
+      <h2>Event: {name}</h2>
+      <p>Location: {location}</p>
+      <p>Description: {description}</p>
+      {session && isEventCreator && (
         <>
           <button
             type="button"
