@@ -2,6 +2,7 @@ import useSWR from "swr";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import AddEventForm from "../AddEventForm";
+import { useSession } from "next-auth/react";
 
 export default function Event() {
   const router = useRouter();
@@ -10,6 +11,7 @@ export default function Event() {
   const { mutate } = useSWR("/api/events");
   const [isEditMode, setIsEditMode] = useState(false);
   const { data, isLoading } = useSWR(`/api/events/${id}`);
+  const { data: session } = useSession();
 
   if (isLoading) {
     return <h1>Loading...</h1>;
@@ -52,17 +54,21 @@ export default function Event() {
       <h2>Event: {data.name}</h2>
       <p>Location: {data.location}</p>
       <p>Description: {data.description}</p>
-      <button
-        type="button"
-        onClick={() => {
-          setIsEditMode(!isEditMode);
-        }}
-      >
-        ✏️
-      </button>
-      <button type="button" onClick={() => handleDeleteEvent()}>
-        ❌
-      </button>
+      {session && (
+        <>
+          <button
+            type="button"
+            onClick={() => {
+              setIsEditMode(!isEditMode);
+            }}
+          >
+            ✏️
+          </button>
+          <button type="button" onClick={() => handleDeleteEvent()}>
+            ❌
+          </button>
+        </>
+      )}
     </>
   );
 }
