@@ -7,11 +7,10 @@ export default async function handler(request, response) {
 
   if (request.method === "GET") {
     const event = await Event.findById(id);
-    response.status(200).json(event);
-
     if (!event) {
       return response.status(404).json({ status: "Not Found" });
     }
+    response.status(200).json(event);
   }
   if (request.method === "PUT") {
     const updatedEvent = request.body;
