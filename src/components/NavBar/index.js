@@ -1,6 +1,5 @@
 import Link from "next/link"
 import { signIn, signOut, useSession } from "next-auth/react"
-import LogIn from "@/components/Login"
 
 export default function NavBar() {
   const { data: session } = useSession()
