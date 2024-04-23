@@ -26,7 +26,7 @@ export default function Event() {
     name,
     location,
     eventType,
-    mapUrl,
+ /*    mapUrl, */
     date,
     time,
     description,
@@ -47,7 +47,7 @@ export default function Event() {
 
     if (response.ok) {
       mutate();
-      router.push("/");
+      router.push("/profile");
     }
   }
   async function handleDeleteEvent() {
@@ -55,7 +55,7 @@ export default function Event() {
       method: "DELETE",
     });
     if (response.ok) {
-      router.push("/");
+      router.push("/profile");
     }
   }
   const isEventCreator = creator.some(
@@ -63,40 +63,51 @@ export default function Event() {
   );
 
   return (
-    <>
+    <div className="max-w-md mx-auto mt-8 p-6 bg-white shadow-md rounded-md">
       {isEditMode && (
         <AddEventForm isEditMode={true} onSubmit={handleEditEvent} />
       )}
-      <h2>Event: {name}</h2>
-      <p>Description: {description}</p>
-      <p>Event Type: {eventType}</p>
-      <p>Location: {location}</p>
-      <iframe
-        width="600"
-        height="450"
-        loading="lazy"
-        allowFullScreen
-        src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyC2DwVkEfy_S0qFkxKMwicAfUZPwfSt05o&q=${encodeURIComponent(
-          location
-        )}`}
-      ></iframe>
-      <p>Date: {new Date(date).toLocaleDateString()}</p>
-      <p>Meeting Time: {time}</p>
+      <h2 className="text-2xl font-semibold mb-4">Event: {name}</h2>
+      <p className="mb-4">{description}</p>
+      <p>
+        <span className="font-semibold">Event Type:</span> {eventType}
+      </p>
+      {/* <p>Location: {location}</p> */}
+      <div className="aspect-w-16 aspect-h-9 mb-4">
+        <iframe
+          className="rounded-md w-full h-full"
+          loading="lazy"
+          allowFullScreen
+          src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyC2DwVkEfy_S0qFkxKMwicAfUZPwfSt05o&q=${encodeURIComponent(
+            location
+          )}`}
+        ></iframe>
+      </div>
+      <p>
+        <span className="font-semibold">Date:</span>{" "}
+        {new Date(date).toLocaleDateString()}
+      </p>
+      <p>
+        <span className="font-semibold">Meeting Time:</span> {time}
+      </p>
       {session && isEventCreator && (
-        <>
+        <div className="mt-4 space-x-4">
           <button
+            className="px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-600 text-white font-semibold"
             type="button"
-            onClick={() => {
-              setIsEditMode(!isEditMode);
-            }}
+            onClick={() => setIsEditMode(!isEditMode)}
           >
-            ✏️
+            ✏️ Edit
           </button>
-          <button type="button" onClick={() => handleDeleteEvent()}>
-            ❌
+          <button
+            className="px-4 py-2 rounded-md bg-red-500 hover:bg-red-600 text-white font-semibold"
+            type="button"
+            onClick={() => handleDeleteEvent()}
+          >
+            ❌ Delete
           </button>
-        </>
+        </div>
       )}
-    </>
+    </div>
   );
 }

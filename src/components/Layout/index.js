@@ -1,6 +1,4 @@
 import NavBar from "../NavBar"
-import LogIn from "../Login"
-import Head from "next/head"
 
 export default function Layout({ children }) {
   return (

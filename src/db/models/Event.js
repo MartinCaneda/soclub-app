@@ -5,7 +5,7 @@ const eventSchema = new Schema({
   name: { type: String, required: true },
   location: { type: String, required: true },
   eventType: { type: String, required: true }, // Add eventType field
-  mapUrl: { type: String, required: true }, // Add mapUrl field
+  //mapUrl: { type: String, required: true }, // Add mapUrl field
   date: { type: Date, required: true }, // Add date field
   time: { type: String, required: true }, // Add meetingTime field
   description: { type: String, default: "" },

@@ -26,7 +26,6 @@ export default function CreateEventPage() {
   }
   return (
     <>
-      <h2>Create an event</h2>
       <AddEventForm onSubmit={handleSubmit} formName="create-event" />
     </>
   );
