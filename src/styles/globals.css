@@ -1,1 +1,13 @@
 @import "mapbox-gl/dist/mapbox-gl.css";
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.nav-button{
+    background-color: deeppink;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
