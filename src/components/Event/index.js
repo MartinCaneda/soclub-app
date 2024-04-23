@@ -22,7 +22,16 @@ export default function Event() {
   if (!eventData) {
     return null;
   }
-  const { name, location, description, creator } = eventData;
+  const {
+    name,
+    location,
+    eventType,
+    mapUrl,
+    date,
+    time,
+    description,
+    creator,
+  } = eventData;
   async function handleEditEvent(event) {
     event.preventDefault();
 
@@ -59,8 +68,20 @@ export default function Event() {
         <AddEventForm isEditMode={true} onSubmit={handleEditEvent} />
       )}
       <h2>Event: {name}</h2>
-      <p>Location: {location}</p>
       <p>Description: {description}</p>
+      <p>Event Type: {eventType}</p>
+      <p>Location: {location}</p>
+      <iframe
+        width="600"
+        height="450"
+        loading="lazy"
+        allowFullScreen
+        src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyC2DwVkEfy_S0qFkxKMwicAfUZPwfSt05o&q=${encodeURIComponent(
+          location
+        )}`}
+      ></iframe>
+      <p>Date: {new Date(date).toLocaleDateString()}</p>
+      <p>Meeting Time: {time}</p>
       {session && isEventCreator && (
         <>
           <button
