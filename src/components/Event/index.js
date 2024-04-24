@@ -12,7 +12,7 @@ export default function Event() {
   const [isEditMode, setIsEditMode] = useState(false)
   const { data: eventData, isLoading: eventDataLoading } = useSWR(`/api/events/${id}`)
   const { data: session } = useSession()
-
+  console.log("CCCCCCC", session)
   if (eventDataLoading) {
     return <h1>Loading...</h1>
   }
@@ -20,16 +20,7 @@ export default function Event() {
   if (!eventData) {
     return null
   }
-  const {
-    name,
-    location,
-    eventType,
-    /*    mapUrl, */
-    date,
-    time,
-    description,
-    creator,
-  } = eventData
+  const { name, location, eventType, date, time, description, creator } = eventData
   async function handleEditEvent(event) {
     event.preventDefault()
 
@@ -57,6 +48,20 @@ export default function Event() {
     }
   }
   const isEventCreator = creator === session?.user?.userId
+
+  async function handleJoinEvent() {
+    const response = await fetch(`/api/events/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userId: session.user.userId }),
+    })
+
+    if (response.ok) {
+      mutate()
+    }
+  }
 
   return (
     <div className="max-w-md mx-auto mt-8 p-6 bg-white shadow-md rounded-md">
@@ -98,6 +103,13 @@ export default function Event() {
             onClick={() => handleDeleteEvent()}
           >
             ❌ Delete
+          </button>
+          <button
+            className="px-4 py-2 rounded-md bg-green-500 hover:bg-green-600 text-white font-semibold"
+            type="button"
+            onClick={handleJoinEvent}
+          >
+            Join
           </button>
         </div>
       )}
