@@ -4,10 +4,10 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-.nav-button{
-    background-color: deeppink;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.nav-button {
+  background-color: grey;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

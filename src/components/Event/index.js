@@ -1,72 +1,66 @@
-import useSWR from "swr";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import AddEventForm from "../AddEventForm";
-import { useSession } from "next-auth/react";
+import useSWR from "swr"
+import { useRouter } from "next/router"
+import { useState } from "react"
+import AddEventForm from "../AddEventForm"
+import { useSession } from "next-auth/react"
 
 export default function Event() {
-  const router = useRouter();
-  const { id } = router.query;
+  const router = useRouter()
+  const { id } = router.query
 
-  const { mutate } = useSWR("/api/events");
-  const [isEditMode, setIsEditMode] = useState(false);
-  const { data: eventData, isLoading: eventDataLoading } = useSWR(
-    `/api/events/${id}`
-  );
-  const { data: session } = useSession();
+  const { mutate } = useSWR("/api/events")
+  const [isEditMode, setIsEditMode] = useState(false)
+  const { data: eventData, isLoading: eventDataLoading } = useSWR(`/api/events/${id}`)
+  const { data: session } = useSession()
 
   if (eventDataLoading) {
-    return <h1>Loading...</h1>;
+    return <h1>Loading...</h1>
   }
 
   if (!eventData) {
-    return null;
+    return null
   }
   const {
     name,
     location,
     eventType,
- /*    mapUrl, */
+    /*    mapUrl, */
     date,
     time,
     description,
     creator,
-  } = eventData;
+  } = eventData
   async function handleEditEvent(event) {
-    event.preventDefault();
+    event.preventDefault()
 
-    const formData = new FormData(event.target);
-    const eventData = Object.fromEntries(formData);
+    const formData = new FormData(event.target)
+    const eventData = Object.fromEntries(formData)
     const response = await fetch(`/api/events/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(eventData),
-    });
+    })
 
     if (response.ok) {
-      mutate();
-      router.push("/profile");
+      mutate()
+      router.push("/profile")
     }
   }
   async function handleDeleteEvent() {
     const response = await fetch(`/api/events/${id}`, {
       method: "DELETE",
-    });
+    })
     if (response.ok) {
-      router.push("/profile");
+      router.push("/profile")
     }
   }
-  const isEventCreator = creator.some(
-    (creatorId) => creatorId === session?.user?.userId
-  );
+  const isEventCreator = creator === session?.user?.userId
 
   return (
     <div className="max-w-md mx-auto mt-8 p-6 bg-white shadow-md rounded-md">
-      {isEditMode && (
-        <AddEventForm isEditMode={true} onSubmit={handleEditEvent} />
-      )}
+      {isEditMode && <AddEventForm isEditMode={true} onSubmit={handleEditEvent} />}
       <h2 className="text-2xl font-semibold mb-4">Event: {name}</h2>
       <p className="mb-4">{description}</p>
       <p>
@@ -79,13 +73,12 @@ export default function Event() {
           loading="lazy"
           allowFullScreen
           src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyC2DwVkEfy_S0qFkxKMwicAfUZPwfSt05o&q=${encodeURIComponent(
-            location
+            location,
           )}`}
         ></iframe>
       </div>
       <p>
-        <span className="font-semibold">Date:</span>{" "}
-        {new Date(date).toLocaleDateString()}
+        <span className="font-semibold">Date:</span> {new Date(date).toLocaleDateString()}
       </p>
       <p>
         <span className="font-semibold">Meeting Time:</span> {time}
@@ -109,5 +102,5 @@ export default function Event() {
         </div>
       )}
     </div>
-  );
+  )
 }
