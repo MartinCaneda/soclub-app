@@ -17,11 +17,11 @@ export default function NavBar() {
               Profile
             </Link>
           </li>
-          <li className="nav-button">
+          {/*           <li className="nav-button">
             <Link className="h-full w-full flex justify-center items-center" href="/create-event">
               Create Event
             </Link>
-          </li>
+          </li> */}
           <li className="nav-button">
             {/*Signed in as {session.user.name} <br />*/}
             <button className="w-full h-full" onClick={() => signOut()}>
