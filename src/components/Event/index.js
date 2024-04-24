@@ -12,7 +12,6 @@ export default function Event() {
   const [isEditMode, setIsEditMode] = useState(false)
   const { data: eventData, isLoading: eventDataLoading } = useSWR(`/api/events/${id}`)
   const { data: session } = useSession()
-  console.log("CCCCCCC", session)
   if (eventDataLoading) {
     return <h1>Loading...</h1>
   }
