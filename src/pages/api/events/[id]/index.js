@@ -25,6 +25,10 @@ export default async function handler(request, response) {
     const { userId } = request.body
     try {
       const event = await Event.findById(id)
+
+      if (event.participants.length >= event.maxParticipants) {
+        return response.status(403).json({ status: "Event is full" })
+      }
       event.participants.push(userId)
       await event.save()
 

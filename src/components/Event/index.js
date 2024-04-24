@@ -19,7 +19,7 @@ export default function Event() {
   if (!eventData) {
     return null
   }
-  const { name, location, eventType, date, time, description, creator } = eventData
+  const { name, location, eventType, date, time, description, creator, participants, maxParticipants } = eventData
   async function handleEditEvent(event) {
     event.preventDefault()
 
@@ -49,6 +49,10 @@ export default function Event() {
   const isEventCreator = creator === session?.user?.userId
 
   async function handleJoinEvent() {
+    if (participants.length >= maxParticipants) {
+      alert("Sorry, the event is booked out")
+      return
+    }
     const response = await fetch(`/api/events/${id}`, {
       method: "POST",
       headers: {
@@ -86,6 +90,9 @@ export default function Event() {
       </p>
       <p>
         <span className="font-semibold">Meeting Time:</span> {time}
+      </p>
+      <p>
+        <span className="font-semibold">Max Participants:</span> {maxParticipants}
       </p>
       {session && isEventCreator && (
         <div className="mt-4 space-x-4">
