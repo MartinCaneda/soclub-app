@@ -32,13 +32,21 @@ export default function CreateEvent() {
   const closeModal = () => setShowModal(false)
 
   return (
-    <>
-      <button onClick={openModal}>Create Event</button>
+    <div className="relative">
+      <div className="absolute top-0 left-0 m-2">
+        <p>Create an Event!</p>
+        <img
+          src="/resources/add.png"
+          alt="Add Event"
+          onClick={openModal}
+          className="w-12 h-12 cursor-pointer justify-center"
+        />
+      </div>
       {showModal && (
         <ReactModal isOpen={showModal} onRequestClose={closeModal}>
           <AddEventForm onSubmit={handleSubmit} formName="create-event" />
         </ReactModal>
       )}
-    </>
+    </div>
   )
 }
