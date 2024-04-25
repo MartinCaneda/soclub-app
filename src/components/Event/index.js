@@ -10,6 +10,7 @@ export default function Event() {
 
   const { mutate } = useSWR("/api/events")
   const [isEditMode, setIsEditMode] = useState(false)
+  const [isJoined, setIsJoined] = useState(false)
   const { data: eventData, isLoading: eventDataLoading } = useSWR(`/api/events/${id}`)
   const { data: session } = useSession()
   if (eventDataLoading) {
@@ -62,6 +63,7 @@ export default function Event() {
     })
 
     if (response.ok) {
+      setIsJoined(!isJoined)
       mutate()
     }
   }
@@ -94,29 +96,37 @@ export default function Event() {
       <p>
         <span className="font-semibold">Max Participants:</span> {maxParticipants}
       </p>
-      {session && isEventCreator && (
+      {session && (
         <div className="mt-4 space-x-4">
-          <button
-            className="px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-600 text-white font-semibold"
-            type="button"
-            onClick={() => setIsEditMode(!isEditMode)}
-          >
-            ✏️ Edit
-          </button>
-          <button
-            className="px-4 py-2 rounded-md bg-red-500 hover:bg-red-600 text-white font-semibold"
-            type="button"
-            onClick={() => handleDeleteEvent()}
-          >
-            ❌ Delete
-          </button>
-          <button
-            className="px-4 py-2 rounded-md bg-green-500 hover:bg-green-600 text-white font-semibold"
-            type="button"
-            onClick={handleJoinEvent}
-          >
-            Join
-          </button>
+          {isEventCreator && (
+            <>
+              <button
+                className="px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-600 text-white font-semibold"
+                type="button"
+                onClick={() => setIsEditMode(!isEditMode)}
+              >
+                Edit
+              </button>
+              <button
+                className="px-4 py-2 rounded-md bg-red-500 hover:bg-red-600 text-white font-semibold"
+                type="button"
+                onClick={() => handleDeleteEvent()}
+              >
+                Delete
+              </button>
+            </>
+          )}
+          {!isEventCreator && (
+            <button
+              className={`px-4 py-2 rounded-md ${
+                isJoined ? "bg-gray-500" : "bg-green-500"
+              } hover:bg-green-600 text-white font-semibold`}
+              type="button"
+              onClick={handleJoinEvent}
+            >
+              {isJoined ? "Joined!" : "Join"}
+            </button>
+          )}
         </div>
       )}
     </div>
