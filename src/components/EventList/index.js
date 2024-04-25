@@ -1,16 +1,15 @@
-import useSWR from "swr";
-import Link from "next/link";
+import useSWR from "swr"
+import Link from "next/link"
 
 export default function EventList() {
-  const { data, isLoading } = useSWR("/api/events");
+  const { data, isLoading } = useSWR("/api/events")
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <h1>Loading...</h1>
   }
 
   if (!data) {
-    return;
+    return
   }
-
 
   return (
     <div className="max-w-lg mx-auto mt-8">
@@ -24,12 +23,8 @@ export default function EventList() {
             <Link href={`/${event._id}`} className="block">
               <div className="flex justify-between items-center">
                 <div>
-                  <p className="text-xl font-semibold text-blue-600 hover:underline">
-                    {event.name}
-                  </p>
-                  <p className="text-gray-500">
-                    Location: {event.location}
-                  </p>
+                  <p className="text-xl font-semibold text-blue-600 hover:underline">{event.name}</p>
+                  <p className="text-gray-500">Location: {event.location}</p>
                 </div>
                 <div className="text-right">
                   <p className="text-gray-500">{new Date(event.date).toLocaleDateString()}</p>
@@ -41,5 +36,5 @@ export default function EventList() {
         ))}
       </ul>
     </div>
-  );
+  )
 }

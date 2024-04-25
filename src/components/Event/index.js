@@ -124,7 +124,7 @@ export default function Event() {
               type="button"
               onClick={handleJoinEvent}
             >
-              {isJoined ? "Joined" : "Join"}
+              {isJoined ? "Joined!" : "Join"}
             </button>
           )}
         </div>
