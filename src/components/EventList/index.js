@@ -1,6 +1,11 @@
 import useSWR from "swr"
 import Link from "next/link"
-
+const eventTypeImages = {
+  music: "/resources/concert.jpg",
+  arts: "/resources/art.jpg",
+  sports: "/resources/sport.jpg",
+  social: "/resources/social.jpg",
+}
 export default function EventList() {
   const { data, isLoading } = useSWR("/api/events")
   if (isLoading) {
@@ -23,6 +28,11 @@ export default function EventList() {
             <Link href={`/${event._id}`} className="block">
               <div className="flex justify-between items-center">
                 <div>
+                  <img
+                    src={eventTypeImages[event.eventType]}
+                    alt={event.eventType}
+                    className="rounded-full w-16 h-16"
+                  />
                   <p className="text-xl font-semibold text-blue-600 hover:underline">{event.name}</p>
                   <p className="text-gray-500">Location: {event.location}</p>
                 </div>

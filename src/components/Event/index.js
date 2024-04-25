@@ -3,6 +3,12 @@ import { useRouter } from "next/router"
 import { useState } from "react"
 import AddEventForm from "../AddEventForm"
 import { useSession } from "next-auth/react"
+const eventTypeImages = {
+  music: "/resources/concert.jpg",
+  arts: "/resources/art.jpg",
+  sports: "/resources/sport.jpg",
+  social: "/resources/social.jpg",
+}
 
 export default function Event() {
   const router = useRouter()
@@ -76,6 +82,7 @@ export default function Event() {
       <p>
         <span className="font-semibold">Event Type:</span> {eventType}
       </p>
+      <img src={eventTypeImages[eventType]} alt={eventType} className="mb-4 rounded-full w-16 h-16" />
       {/* <p>Location: {location}</p> */}
       <div className="aspect-w-16 aspect-h-9 mb-4">
         <iframe
