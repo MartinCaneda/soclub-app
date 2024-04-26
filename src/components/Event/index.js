@@ -3,6 +3,7 @@ import { useRouter } from "next/router"
 import { useState } from "react"
 import AddEventForm from "../AddEventForm"
 import { useSession } from "next-auth/react"
+import { format } from "date-fns"
 const eventTypeImages = {
   music: "/resources/concert.jpg",
   arts: "/resources/art.jpg",
@@ -27,6 +28,9 @@ export default function Event() {
     return null
   }
   const { name, location, eventType, date, time, description, creator, participants, maxParticipants } = eventData
+
+  const formattedDate = format(new Date(date), "MM/dd/yyyy")
+
   async function handleEditEvent(event) {
     event.preventDefault()
 
@@ -76,14 +80,20 @@ export default function Event() {
 
   return (
     <div className="max-w-md mx-auto mt-8 p-6 bg-white shadow-md rounded-md">
-      {isEditMode && <AddEventForm isEditMode={true} onSubmit={handleEditEvent} />}
+      {isEditMode && (
+        <AddEventForm
+          eventData={eventData}
+          formattedDate={formattedDate}
+          isEditMode={true}
+          onSubmit={handleEditEvent}
+        />
+      )}
       <h2 className="text-2xl font-semibold mb-4">Event: {name}</h2>
       <p className="mb-4">{description}</p>
       <p>
         <span className="font-semibold">Event Type:</span> {eventType}
       </p>
       <img src={eventTypeImages[eventType]} alt={eventType} className="mb-4 rounded-full w-16 h-16" />
-      {/* <p>Location: {location}</p> */}
       <div className="aspect-w-16 aspect-h-9 mb-4">
         <iframe
           className="rounded-md w-full h-full"
@@ -95,7 +105,7 @@ export default function Event() {
         ></iframe>
       </div>
       <p>
-        <span className="font-semibold">Date:</span> {new Date(date).toLocaleDateString()}
+        <span className="font-semibold">Date:</span> {formattedDate}
       </p>
       <p>
         <span className="font-semibold">Meeting Time:</span> {time}
