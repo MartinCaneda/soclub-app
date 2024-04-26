@@ -88,10 +88,10 @@ export default function Event() {
           onSubmit={handleEditEvent}
         />
       )}
-      <h2 className="text-2xl font-semibold mb-4">Event: {name}</h2>
+      <h2 className="text-2xl font-semibold mb-4">{name}</h2>
       <p className="mb-4">{description}</p>
       <p>
-        <span className="font-semibold">Event Type:</span> {eventType}
+        <span className="font-semibold"></span>
       </p>
       <img src={eventTypeImages[eventType]} alt={eventType} className="mb-4 rounded-full w-16 h-16" />
       <div className="aspect-w-16 aspect-h-9 mb-4">
