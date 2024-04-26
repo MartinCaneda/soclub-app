@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export default function AddEventForm({ onSubmit, isEditMode }) {
+export default function AddEventForm({ onSubmit, isEditMode, eventData }) {
   const [eventType, setEventType] = useState("")
   const handleEventTypeChange = (event) => {
     setEventType(event.target.value)
@@ -13,6 +13,7 @@ export default function AddEventForm({ onSubmit, isEditMode }) {
       <input
         id="name"
         name="name"
+        defaultValue={eventData?.name}
         type="text"
         required
         className="w-full py-2 px-3 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
@@ -24,6 +25,7 @@ export default function AddEventForm({ onSubmit, isEditMode }) {
       <input
         id="location"
         name="location"
+        defaultValue={eventData?.location}
         type="text"
         required
         className="w-full py-2 px-3 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
@@ -35,14 +37,17 @@ export default function AddEventForm({ onSubmit, isEditMode }) {
       <select
         id="eventType"
         name="eventType"
-        value={eventType}
+        defaultValue={eventData ? eventData.eventType : "Choose a category"}
+        //value={eventType}
         onChange={handleEventTypeChange}
         className="w-full py-2 px-3 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
         required
       >
-        <option disabled value="">
-          Choose a category
-        </option>
+        {
+          <option disabled value="">
+            Choose a category
+          </option>
+        }
         <option value="music">Music</option>
         <option value="arts">Arts</option>
         <option value="sports">Sports</option>
@@ -54,6 +59,7 @@ export default function AddEventForm({ onSubmit, isEditMode }) {
       </label>
       <textarea
         name="description"
+        defaultValue={eventData?.description}
         id="description"
         cols="30"
         rows="5"
@@ -70,6 +76,7 @@ export default function AddEventForm({ onSubmit, isEditMode }) {
       <input
         id="date"
         name="date"
+        defaultValue={eventData?.date.slice(0, 10)}
         type="date"
         required
         className="w-full py-2 px-3 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
@@ -81,6 +88,7 @@ export default function AddEventForm({ onSubmit, isEditMode }) {
       <input
         id="time"
         name="time"
+        defaultValue={eventData?.time}
         type="time"
         required
         className="w-full py-2 px-3 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
@@ -91,6 +99,7 @@ export default function AddEventForm({ onSubmit, isEditMode }) {
       <input
         id="maxParticipants"
         name="maxParticipants"
+        defaultValue={eventData?.maxParticipants}
         type="number"
         min="1"
         className="w-full py-2 px-3 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
