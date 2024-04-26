@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <div>
-        {session && <CreateEvent />}
+        <CreateEvent />
         <EventList />
       </div>
     </>
