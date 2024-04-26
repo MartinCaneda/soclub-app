@@ -11,3 +11,10 @@
   justify-content: center;
   align-items: center;
 }
+
+#SoClub {
+  font-family: "Jersey 15 Charted", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 4em;
+}
