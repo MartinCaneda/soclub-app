@@ -7,32 +7,40 @@ export default function NavBar() {
     <nav className="h-full">
       {session ? (
         <ul className="h-full flex flex-col justify-between">
-          <li className="nav-button">
+          <li className="nav-button" style={{ paddingTop: "85px" }}>
             <Link href="/" className="h-full w-full flex justify-center items-center">
-              <img src="/resources/home.png" alt="Home" className="w-10 h-10" />
+              <img src="/resources/house.svg" alt="Home" className="w-10 h-10 hover:bg-gray-200 rounded-full" />
             </Link>
           </li>
           <li className="nav-button">
             <Link href="/profile" className="h-full w-full flex justify-center items-center">
-              <img src="/resources/profile.png" alt="Home" className="w-10 h-10" />
+              <img src="/resources/account.svg" alt="Home" className="w-10 h-10 hover:bg-gray-200 rounded-full" />
             </Link>
           </li>
 
           <li className="nav-button">
-            <button className="w-full h-full flex justify-center items-center" onClick={() => signOut()}>
-              <img src="/resources/log-out.png" alt="Sign in" className="w-6 h-6" />
+            <button
+              className="w-full h-full flex justify-center items-center"
+              style={{ paddingBottom: "85px" }}
+              onClick={() => signOut()}
+            >
+              <img src="/resources/logout.svg" alt="Sign in" className="w-10 h-10 hover:bg-gray-200 rounded-full" />
             </button>
           </li>
         </ul>
       ) : (
         <ul className="h-full flex flex-col justify-between">
-          <li className="nav-button">
+          <li className="nav-button" style={{ paddingTop: "85px" }}>
             <Link href="/" className="h-full w-full flex justify-center items-center">
-              <img src="/resources/home.png" alt="Home" className="w-10 h-10" />
+              <img src="/resources/house.svg" alt="Home" className="w-10 h-10 hover:bg-gray-200 rounded-full" />
             </Link>
           </li>
-          <button className=" w-full h-full flex justify-center items-center" onClick={() => signIn()}>
-            <img src="/resources/log-in.png" alt="Sign in" className="w- h-6" />
+          <button
+            className=" w-full h-full flex justify-center items-center"
+            style={{ paddingBottom: "85px" }}
+            onClick={() => signIn()}
+          >
+            <img src="/resources/login.svg" alt="Sign in" className="w-10 h-10 hover:bg-gray-200 rounded-full" />
           </button>
         </ul>
       )}
