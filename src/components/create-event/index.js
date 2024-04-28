@@ -37,12 +37,14 @@ export default function CreateEvent() {
         <h1 id="SoClub">SoClub</h1>
         <p className="text-sm text-gray-500">Upcoming events</p>
       </div>
-      <img
-        src="/resources/add.svg"
-        alt="Add Event"
-        onClick={openModal}
-        className="w-12 h-12 cursor-pointer justify-center"
-      />
+      {session && (
+        <img
+          src="/resources/add.svg"
+          alt="Add Event"
+          onClick={openModal}
+          className="w-12 h-12 cursor-pointer justify-center"
+        />
+      )}
       {showModal && (
         <ReactModal isOpen={showModal} onRequestClose={closeModal}>
           <AddEventForm onSubmit={handleSubmit} formName="create-event" />

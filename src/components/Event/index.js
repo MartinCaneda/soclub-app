@@ -141,7 +141,7 @@ export default function Event() {
               type="button"
               onClick={handleJoinEvent}
             >
-              {isJoined ? "Joined!" : "Join"}
+              {isJoined || eventData.participants.includes(session.user.userId) ? "Joined!" : "Join"}
             </button>
           )}
         </div>
