@@ -3,6 +3,7 @@ import { getSession } from "next-auth/react"
 import useSWR from "swr"
 import UserEvents from "@/components/UserEvents"
 import UserJoinedEvents from "@/components/JoinedEventsList"
+import FavoritesList from "@/components/FavoritesList"
 
 export default function MyProfile({ userId }) {
   const { data, isLoading } = useSWR(`/api/user/${userId}`)
@@ -12,6 +13,7 @@ export default function MyProfile({ userId }) {
       <Profile />
       <UserEvents />
       <UserJoinedEvents />
+      <FavoritesList />
     </>
   )
 }

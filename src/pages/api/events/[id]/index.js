@@ -25,23 +25,32 @@ export default async function handler(request, response) {
     const { userId } = request.body
     try {
       const event = await Event.findById(id)
-      if (event.participants.length >= event.maxParticipants) {
-        return response.status(403).json({ status: "Event is full" })
+      if (action === "join") {
+        if (event.participants.length >= event.maxParticipants) {
+          return response.status(403).json({ status: "Event is full" })
+        }
+
+        if (event.participants.includes(userId)) {
+          event.participants.pull(userId)
+        } else {
+          event.participants.push(userId)
+        }
+
+        await event.save()
+        response.status(200).json({ status: `User ${userId} joined event ${id}` })
       }
-
-      if (event.participants.includes(userId)) {
-        event.participants.pull(userId)
-      } else {
-        event.participants.push(userId)
+      if (action === "like") {
+        if (event.likedBy.includes(userId)) {
+          event.likedBy.pull(userId)
+        } else {
+          event.likedBy.push(userId)
+        }
+        await event.save()
+        return response.status(200).json({ status: `User ${userId} liked event ${id}` })
       }
-
-      await event.save()
-
       if (!event) {
         return response.status(404).json({ status: "Not Found" })
       }
-
-      response.status(200).json({ status: `User ${userId} joined event ${id}` })
     } catch (error) {
       console.error(error)
       response.status(500).json({ status: "Internal Server Error" })

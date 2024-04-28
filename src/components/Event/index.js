@@ -18,6 +18,7 @@ export default function Event() {
   const { mutate } = useSWR("/api/events")
   const [isEditMode, setIsEditMode] = useState(false)
   const [isJoined, setIsJoined] = useState(false)
+  const [isLiked, setIsLiked] = useState(false)
   const { data: eventData, isLoading: eventDataLoading } = useSWR(`/api/events/${id}`)
   const { data: session } = useSession()
   if (eventDataLoading) {
@@ -27,7 +28,8 @@ export default function Event() {
   if (!eventData) {
     return null
   }
-  const { name, location, eventType, date, time, description, creator, participants, maxParticipants } = eventData
+  const { name, location, eventType, date, time, description, creator, participants, likedBy, maxParticipants } =
+    eventData
 
   const formattedDate = format(new Date(date), "MM/dd/yyyy")
 
@@ -46,7 +48,7 @@ export default function Event() {
 
     if (response.ok) {
       mutate()
-      router.push("/profile")
+      router.back()
     }
   }
   async function handleDeleteEvent() {
@@ -54,7 +56,7 @@ export default function Event() {
       method: "DELETE",
     })
     if (response.ok) {
-      router.push("/profile")
+      router.back()
     }
   }
   const isEventCreator = creator === session?.user?.userId
@@ -64,7 +66,7 @@ export default function Event() {
       alert("Sorry, the event is booked out")
       return
     }
-    const response = await fetch(`/api/events/${id}`, {
+    const response = await fetch(`/api/events/${id}/join`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -74,6 +76,21 @@ export default function Event() {
 
     if (response.ok) {
       setIsJoined(!isJoined)
+      mutate()
+    }
+  }
+
+  async function handleJoinFavorites() {
+    const response = await fetch(`/api/events/${id}/like`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userId: session.user.userId }),
+    })
+
+    if (response.ok) {
+      setIsLiked(!isLiked)
       mutate()
     }
   }
@@ -144,6 +161,14 @@ export default function Event() {
               {isJoined || eventData.participants.includes(session.user.userId) ? "Joined!" : "Join"}
             </button>
           )}
+          <button
+            className={`px-4 py-2 rounded-md bg-green-500
+            hover:bg-green-600 text-white font-semibold`}
+            type="button"
+            onClick={handleJoinFavorites}
+          >
+            {isLiked || eventData.likedBy.includes(session.user.userId) ? "Liked!" : "Like"}
+          </button>
         </div>
       )}
     </div>

@@ -10,6 +10,7 @@ const eventSchema = new Schema({
   description: { type: String, default: "" },
   creator: { type: Schema.Types.ObjectId, ref: "User" },
   participants: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  likedBy: [{ type: Schema.Types.ObjectId, ref: "User" }],
   maxParticipants: { type: Number },
 })
 const Event = mongoose.models.Event || mongoose.model("Event", eventSchema)
