@@ -109,7 +109,9 @@ export default function Event() {
           onSubmit={handleEditEvent}
         />
       )}
-      <h2 className="text-2xl font-semibold mb-4">{name}</h2>
+      <h2 className="text-2xl font-semibold mb-4 underline" id="heading-event">
+        {name}
+      </h2>
       <p className="mb-4">{description}</p>
       <p>
         <span className="font-semibold"></span>

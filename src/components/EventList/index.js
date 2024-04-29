@@ -32,7 +32,9 @@ export default function EventList() {
                     alt={event.eventType}
                     className="rounded-full w-16 h-16"
                   />
-                  <p className="text-xl font-semibold text-blue-600 hover:underline">{event.name}</p>
+                  <p className="text-xl font-semibold text-black hover:underline" id="heading">
+                    {event.name}
+                  </p>
                   {/* <p className="text-gray-500">Location: {event.location}</p> */}
                 </div>
                 <div className="text-right">
