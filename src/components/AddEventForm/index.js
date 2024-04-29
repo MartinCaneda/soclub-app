@@ -48,10 +48,10 @@ export default function AddEventForm({ onSubmit, isEditMode, eventData }) {
             Choose a category
           </option>
         }
-        <option value="music">Music</option>
-        <option value="arts">Arts</option>
-        <option value="sports">Sports</option>
+        <option value="music">Live Show</option>
         <option value="social">Social</option>
+        <option value="sports">Sports</option>
+        <option value="cultural">Cultural</option>
       </select>
 
       <label htmlFor="description" className="block mt-4 mb-2 font-semibold">
@@ -63,7 +63,7 @@ export default function AddEventForm({ onSubmit, isEditMode, eventData }) {
         id="description"
         cols="30"
         rows="5"
-        maxLength="100"
+        maxLength="175"
         className="w-full py-2 px-3 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
       ></textarea>
 

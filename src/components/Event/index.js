@@ -10,7 +10,7 @@ import { HeartIcon as HeartSolidIcon } from "@heroicons/react/solid"
 
 const eventTypeImages = {
   music: "/resources/concert.jpg",
-  arts: "/resources/art.jpg",
+  cultural: "/resources/art.jpg",
   sports: "/resources/sport.jpg",
   social: "/resources/social.jpg",
 }
@@ -25,6 +25,7 @@ export default function Event() {
   const [isLiked, setIsLiked] = useState(false)
   const { data: eventData, isLoading: eventDataLoading } = useSWR(`/api/events/${id}`)
   const { data: session } = useSession()
+  const [participantCount, setParticipantCount] = useState(eventData?.participants.length || 0)
   if (eventDataLoading) {
     return <h1>Loading...</h1>
   }
@@ -60,6 +61,7 @@ export default function Event() {
       method: "DELETE",
     })
     if (response.ok) {
+      mutate()
       router.back()
     }
   }
@@ -70,6 +72,7 @@ export default function Event() {
       alert("Sorry, the event is booked out")
       return
     }
+
     const response = await fetch(`/api/events/${id}/join`, {
       method: "POST",
       headers: {
@@ -81,6 +84,7 @@ export default function Event() {
     if (response.ok) {
       setIsJoined(!isJoined)
       mutate()
+      setParticipantCount(participantCount + 1)
     }
   }
 
@@ -134,7 +138,7 @@ export default function Event() {
         <span className="font-semibold">at</span> {time}
       </p>
       <p>
-        <span className="font-semibold">Spots taken</span> {maxParticipants}
+        <span className="font-semibold">Spots taken</span> {participantCount}/{maxParticipants}
       </p>
       {session && (
         <div className="flex space-x-4 mt-6">

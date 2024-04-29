@@ -3,7 +3,7 @@ import Link from "next/link"
 import { useSession } from "next-auth/react"
 const eventTypeImages = {
   music: "/resources/concert.jpg",
-  arts: "/resources/art.jpg",
+  cultural: "/resources/art.jpg",
   sports: "/resources/sport.jpg",
   social: "/resources/social.jpg",
 }
@@ -28,7 +28,9 @@ export default function UserJoinedEvents() {
   console.log("XXXXXXXXXXX", joinedEvents)
   return (
     <div className="max-w-lg mx-auto mt-8">
-      <h1 className="text-2xl font-bold mb-4">Joined Events</h1>
+      <h1 className="text-2xl font-bold mb-4" id="heading-event">
+        Joined Events
+      </h1>
       <ul className="space-y-4">
         {joinedEvents.map((event) => (
           <li
@@ -43,7 +45,9 @@ export default function UserJoinedEvents() {
                     alt={event.eventType}
                     className="rounded-full w-16 h-16"
                   />
-                  <p className="text-xl font-semibold text-blue-600 hover:underline">{event.name}</p>
+                  <p className="text-xl font-semibold text-black-600 hover:underline" id="heading">
+                    {event.name}
+                  </p>
                   {/* <p className="text-gray-500">Location: {event.location}</p> */}
                 </div>
                 <div className="text-right">

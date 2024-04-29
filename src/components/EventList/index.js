@@ -2,7 +2,7 @@ import useSWR from "swr"
 import Link from "next/link"
 const eventTypeImages = {
   music: "/resources/concert.jpg",
-  arts: "/resources/art.jpg",
+  cultural: "/resources/art.jpg",
   sports: "/resources/sport.jpg",
   social: "/resources/social.jpg",
 }
@@ -15,11 +15,11 @@ export default function EventList() {
   if (!data) {
     return
   }
-
+  const sortedEvents = data.sort((a, b) => new Date(a.date) - new Date(b.date))
   return (
     <div className="max-w-lg mx-auto mt-8">
       <ul className="space-y-4">
-        {data.map((event) => (
+        {sortedEvents.map((event) => (
           <li
             key={event._id}
             className="bg-white shadow-md rounded-md p-4 transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg"

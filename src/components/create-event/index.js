@@ -35,7 +35,7 @@ export default function CreateEvent() {
     <div className="flex items-center justify-between border-b border-gray-300 pb-2">
       <div className="mr-4">
         <h1 id="SoClub">SoClub</h1>
-        <p className="text-sm text-gray-500">Upcoming events</p>
+        <p className="text-sm text-gray-500">Upcoming activities</p>
       </div>
       {session && (
         <img

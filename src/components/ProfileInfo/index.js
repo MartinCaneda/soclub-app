@@ -10,7 +10,9 @@ export default function Profile() {
 
   return (
     <div className="max-w-md mx-auto mt-8 p-6 bg-white shadow-md rounded-md">
-      <h1 className="text-2xl font-bold mb-4">Profile</h1>
+      <h1 className="text-2xl font-bold mb-4" id="heading-event">
+        Profile
+      </h1>
       <div className="flex items-center space-x-4">
         <img src={user.image} alt="Profile Picture" className="w-12 h-12 rounded-full" />
         <div className="flex flex-col">
