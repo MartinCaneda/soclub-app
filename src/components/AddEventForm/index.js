@@ -107,7 +107,7 @@ export default function AddEventForm({ onSubmit, isEditMode, eventData }) {
 
       <button
         type="submit"
-        className="mt-6 w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded-md shadow-md hover:bg-indigo-700"
+        className="mt-6 w-full py-2 px-4 font-semibold rounded-md border-black shadow-md hover:bg-black hover:text-white"
       >
         {isEditMode ? "Edit Event" : "Add Event"}
       </button>

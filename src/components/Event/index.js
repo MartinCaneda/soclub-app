@@ -4,6 +4,10 @@ import { useState } from "react"
 import AddEventForm from "../AddEventForm"
 import { useSession } from "next-auth/react"
 import { format } from "date-fns"
+import { HeartIcon } from "@heroicons/react/outline"
+
+import { HeartIcon as HeartSolidIcon } from "@heroicons/react/solid"
+
 const eventTypeImages = {
   music: "/resources/concert.jpg",
   arts: "/resources/art.jpg",
@@ -96,7 +100,7 @@ export default function Event() {
   }
 
   return (
-    <div className="max-w-md mx-auto mt-8 p-6 bg-white shadow-md rounded-md">
+    <div className="max-w-md mx-auto mt-8 p-6 bg-white shadow-md rounded-md relative">
       {isEditMode && (
         <AddEventForm
           eventData={eventData}
@@ -122,27 +126,29 @@ export default function Event() {
         ></iframe>
       </div>
       <p>
-        <span className="font-semibold">Date:</span> {formattedDate}
+        <span className="font-semibold">We meet on the</span> {formattedDate}
       </p>
       <p>
-        <span className="font-semibold">Meeting Time:</span> {time}
+        <span className="font-semibold">at</span> {time}
       </p>
       <p>
-        <span className="font-semibold">Max Participants:</span> {maxParticipants}
+        <span className="font-semibold">Spots taken</span> {maxParticipants}
       </p>
       {session && (
-        <div className="mt-4 space-x-4">
+        <div className="flex space-x-4 mt-6">
           {isEventCreator && (
             <>
               <button
-                className="px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-600 text-white font-semibold"
+                className="px-3 py-1 text-sm rounded-md border border-black
+                font-semibold hover:bg-black hover:text-white"
                 type="button"
                 onClick={() => setIsEditMode(!isEditMode)}
               >
                 Edit
               </button>
               <button
-                className="px-4 py-2 rounded-md bg-red-500 hover:bg-red-600 text-white font-semibold"
+                className="px-3 py-1 text-sm rounded-md border border-black
+                 font-semibold hover:bg-black hover:text-white"
                 type="button"
                 onClick={() => handleDeleteEvent()}
               >
@@ -150,11 +156,14 @@ export default function Event() {
               </button>
             </>
           )}
+
           {!isEventCreator && (
             <button
-              className={`px-4 py-2 rounded-md ${
-                isJoined ? "bg-gray-500" : "bg-green-500"
-              } hover:bg-green-600 text-white font-semibold`}
+              className={`px-3 py-1 text-sm rounded-md border border-black ${
+                isJoined || eventData.participants.includes(session.user.userId)
+                  ? "bg-black text-white"
+                  : "bg-white text-black"
+              } font-semibold hover:bg-black hover:text-white`}
               type="button"
               onClick={handleJoinEvent}
             >
@@ -162,13 +171,24 @@ export default function Event() {
             </button>
           )}
           <button
-            className={`px-4 py-2 rounded-md bg-green-500
-            hover:bg-green-600 text-white font-semibold`}
+            className={`px-3 py-1 text-sm rounded-md border border-black ${
+              isLiked || eventData.likedBy.includes(session.user.userId) ? "bg-black text-white" : "bg-white text-black"
+            } font-semibold hover:bg-black hover:text-white`}
             type="button"
             onClick={handleJoinFavorites}
           >
-            {isLiked || eventData.likedBy.includes(session.user.userId) ? "Liked!" : "Like"}
+            {isLiked || eventData.likedBy.includes(session.user.userId) ? (
+              <HeartSolidIcon className="h-6 w-6" />
+            ) : (
+              <HeartIcon className="h-6 w-6" />
+            )}
           </button>
+          <img
+            src="/resources/back.svg"
+            alt="Go Back"
+            className="w-8 h-8 absolute top-2 right-2 cursor-pointer"
+            onClick={() => router.back()}
+          />
         </div>
       )}
     </div>
